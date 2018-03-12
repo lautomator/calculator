@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="This is a calculator.">
+        <meta name="author" content="John Merigliano">
+        <link rel="shortcut icon" type="image/x-icon" href="img/c.png">
+        <title>Calculator</title>
+    </head>
+    <body style="opacity: 0;">
+        <div class="container">
+            <div id="console" class="display"></div>
+            <div class="keypad">
+                <div class="key-row">
+                    <div id="key-7" class="key">7</div>
+                    <div id="key-8" class="key">8</div>
+                    <div id="key-9" class="key">9</div>
+                    <div id="key-divide" class="key">/</div>
+                </div>
+
+                <div class="key-row">
+                    <div id="key-4" class="key">4</div>
+                    <div id="key-5" class="key">5</div>
+                    <div id="key-6" class="key">6</div>
+                    <div id="key-multiply" class="key">*</div>
+                </div>
+
+                <div class="key-row">
+                    <div id="key-1" class="key">1</div>
+                    <div id="key-2" class="key">2</div>
+                    <div id="key-3" class="key">3</div>
+                    <div id="key-minus" class="key">-</div>
+                </div>
+
+                <div class="key-row">
+                    <div id="key-clear" class="key">C</div>
+                    <div id="key-0" class="key">0</div>
+                    <div id="key-decimal" class="key">.</div>
+                    <div id="key-plus" class="key">+</div>
+                </div>
+
+                <div class="key-row">
+                    <div id="key-equal" class="key key-equal">=</div>
+                </div>
+            </div><!-- /keypad -->
+        </div><!-- /container -->
+
+        <script>
+            var calculatorApp = {
+                ver: "1.0",
+                dt: new Date(),
+                ran: Math.floor(Math.random() * 100000),
+                cache: null,
+                /*
+                 * =============================
+                 *  EDIT THIS BEFORE PRODUCTION
+                 */
+                inDev: true, // false for prod.
+                /* =============================
+                 */
+                targets: {
+                    head: document.getElementsByTagName("head"),
+                    body: document.getElementsByTagName("body"),
+                    console: document.getElementById("console"),
+                    keys: document.getElementsByClassName("key")
+                },
+                styles: ["style.css"],
+                scripts: ["main.js"],
+                versioning: function (m) {
+                    "use strict";
+                    // generates the cache buster for assets
+                    if (m.inDev) {
+                        // development
+                        m.cache = m.ran;
+                    } else {
+                        // production
+                        m.cache = m.ver + "-" + m.dt.getFullYear() + "-" + m.dt.getMonth() + "-" + m.dt.getDate();
+                    }
+                    return false;
+                },
+                enqueueStyles: function (m) {
+                    "use strict";
+                    // enqueues the css
+                    var h = m.targets.head[0];
+                    var style = document.createElement("link");
+                    var version = m.cache;
+                    var index = 0;
+
+                    while (index < m.styles.length) {
+                        style.rel = "stylesheet";
+                        style.type = "text/css";
+                        style.href = m.styles[index] + "?v=" + version;
+                        h.appendChild(style);
+                        index += 1;
+                    }
+                    return false;
+                },
+                enqueueScripts: function (m) {
+                    "use strict";
+                    // enqueues javascript
+                    var b = m.targets.body[0];
+                    var script = document.createElement("script");
+                    var version = m.cache;
+                    var index = 0;
+
+                    while (index < m.scripts.length) {
+                        script.src = m.scripts[index] + "?v=" + version;
+                        script.defer = "defer";
+                        b.appendChild(script);
+                        index += 1;
+                    }
+                    return false;
+
+                },
+                init: function (m) {
+                    "use strict";
+                    m.versioning(m);
+                    m.enqueueStyles(m);
+                    m.enqueueScripts(m);
+                    return false;
+                }
+            };
+
+            window.addEventListener("load", function () {
+                "use strict";
+                calculatorApp.init(calculatorApp);
+
+                setTimeout(function () {
+                    calculatorApp.targets.body[0].style.opacity = "1.0";
+                }, 200);
+            });
+        </script>
+    </body>
+</html>

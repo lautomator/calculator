@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.container {
+    border: 1px solid #000;
+    height: 330px;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 203px;
+}
+
+.display {
+    border-bottom: solid 1px #000;
+    height: 75px;
+    width: 100%;
+}
+
+.key-row {
+    border-bottom: 1px solid #000;
+    height: 50px;
+    width: 100%;
+}
+
+.key-row:last-of-type {
+    border-bottom: none;
+}
+
+.key {
+    border-right: 1px solid #000;
+    cursor: pointer;
+    display: grid;
+    float: left;
+    height: 50px;
+    overflow: hidden;
+    width: 50px;
+}
+
+.key:last-of-type {
+    border-right: none;
+}
+
+.key-equal {
+    width: 100%;
+}
+
+/*#key-1 { background: #fff url("img/led-digits.png") no-repeat -35px 0; }
+#key-2 { background: #fff url("img/led-digits.png") no-repeat -90px 0; }
+#key-3 { background: #fff url("img/led-digits.png") no-repeat -140px 0; }
+#key-4 { background: #fff url("img/led-digits.png") no-repeat -190px 0; }
+#key-5 { background: #fff url("img/led-digits.png") no-repeat -240px 0; }
+#key-6 { background: #fff url("img/led-digits.png") no-repeat -290px 0; }
+#key-7 { background: #fff url("img/led-digits.png") no-repeat -340px 0; }
+#key-8 { background: #fff url("img/led-digits.png") no-repeat -390px 0; }
+#key-9 { background: #fff url("img/led-digits.png") no-repeat -440px 0; }
+#key-0 { background: #fff url("img/led-digits.png") no-repeat 10px 0; }
+#key-clear { background: #fff url("img/clear.png") no-repeat 0 0; }*/
