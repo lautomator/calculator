@@ -5,11 +5,13 @@ function myCalculatorApp(params) {
     var model = {
         targets: params.targets,
         validNumericKeys: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."],
-        validOperatorKeys: ["+", "-", "*", "/", "=", "c"],
+        validOperatorKeys: ["+", "-", "*", "/", "=", "enter", "c", "m", "mr"],
         userIn: null,
+        buffer: 0,
         memory: 0,
         consoleOut: 0,
-        operator: null
+        operator: null,
+        status: null
     };
 
     function convertToNumber(s) {
@@ -93,32 +95,47 @@ function myCalculatorApp(params) {
         // validates stored data.
         var digits = "";
 
-        if (uin !== ".") {
-            // handle an integer
-            if (model.userIn === null) {
-                digits = uin;
-                model.userIn = convertToNumber(digits);
+        if (uin !== null) {
+            if (uin !== ".") {
+                // handle an integer
+                if (model.userIn === null) {
+                    digits = uin;
+                    model.userIn = convertToNumber(digits);
+                } else {
+                    digits = convertToString(model.userIn) + uin;
+                    model.userIn = Number(digits);
+                }
             } else {
-                digits = convertToString(model.userIn) + uin;
-                model.userIn = Number(digits);
-            }
-        } else {
-            // handle a float
-            if (model.userIn === null) {
-                model.userIn = uin;
-            } else {
-                digits = convertToString(model.userIn) + uin;
-                if (decimalCheck(digits)) {
-                    model.userIn = digits;
+                // handle a float
+                if (model.userIn === null) {
+                    model.userIn = uin;
+                } else {
+                    digits = convertToString(model.userIn) + uin;
+                    if (decimalCheck(digits)) {
+                        model.userIn = digits;
+                    }
                 }
             }
+        } else {
+            model.userIn = null;
         }
     }
 
     function setMemory(storedInput) {
-        // Sets the balance from the
+        // Sets the memory from the
         // existing input <num>.
         model.memory = storedInput;
+    }
+
+    function getMemory() {
+        // Get the stored memory.
+        model.userIn = model.memory;
+    }
+
+    function setBuffer(storedInput) {
+        // Sets the buffer from the
+        // existing input <num>.
+        model.buffer = storedInput;
     }
 
     function setOperator(uin) {
@@ -135,19 +152,32 @@ function myCalculatorApp(params) {
         model.consoleOut = item;
     }
 
+    function setStatus(msg) {
+        // Takes in a status message <str>
+        model.status = msg;
+    }
+
     function clearAll() {
+        // hard reset
         model.userIn = null;
-        model.memory = 0;
+        model.buffer = 0;
         model.consoleOut = 0;
         model.operator = null;
+        model.memory = 0;
+        model.status = null;
     }
 
     // views
     function renderToConsole(uin) {
         // Displays numbers or
         // decimals in the console
-
         model.targets.console.innerText = uin;
+
+        if (model.status !== null) {
+            model.targets.status.innerText = model.status;
+        } else {
+            model.targets.status.innerText = "";
+        }
     }
 
     // controller
@@ -164,23 +194,32 @@ function myCalculatorApp(params) {
         if (uin === "C") {
             // clear
             clearAll();
-        } else if (model.validOperatorKeys.indexOf(uin) > -1 && uin !== "=") {
+        } else if (model.validOperatorKeys.indexOf(uin) > -1 && uin !== "=" && uin !== "Enter") {
             // an operation request
             setOperator(uin);
-            // move any stored input to memory
+            // move any stored input to the buffer
             if (model.userIn !== null) {
-                setMemory(model.userIn);
+                setBuffer(model.userIn);
             }
             // reset the stored input
-            model.userIn = null;
-        } else if (uin === "=") {
+            setUserIn(null);
+        } else if (uin === "M") {
+            // the current console output is stored to memory
+            setMemory(model.consoleOut);
+            setStatus("m");
+        } else if (uin === "MR") {
+            // the memory buffer is envoked
+            setConsoleOut(model.memory);
+            setStatus("m");
+            getMemory();
+        } else if (uin === "=" || uin === "Enter") {
             // a total is requested
             if (model.userIn !== null && model.userIn !== ".") {
-                total = doOperation(model.memory, model.userIn, model.operator);
+                total = doOperation(model.buffer, model.userIn, model.operator);
                 setConsoleOut(total);
-                setMemory(total);
-                model.userIn = null;
-                model.operator = null;
+                setBuffer(total);
+                setUserIn(null);
+                setOperator(null);
             }
         } else {
             // handle numeric input
@@ -193,7 +232,7 @@ function myCalculatorApp(params) {
 
         // debug
         if (params.inDev) {
-            console.log("keypress:", uin, "userIn:", model.userIn, "operator:", model.operator, "memory:", model.memory, "consoleOut:", model.consoleOut);
+            console.log("keypress:", uin, "userIn:", model.userIn, "operator:", model.operator, "buffer:", model.buffer, "memory:", model.memory, "consoleOut:", model.consoleOut, "status:", model.status);
         }
     }
 
@@ -227,6 +266,7 @@ function myCalculatorApp(params) {
         var keys = m.targets.keys;
         var index = 0;
 
+        // cycle through keys and get user actions
         while (index < keys.length) {
             clickKeys(index);
             index += 1;

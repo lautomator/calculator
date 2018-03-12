@@ -12,7 +12,10 @@
     </head>
     <body style="opacity: 0;">
         <div class="container">
-            <div id="console" class="display"></div>
+            <div class="display">
+                <span id="console">0</span>
+                <span id="status"></span>
+            </div>
             <div class="keypad">
                 <div class="key-row">
                     <div id="key-7" class="key">7</div>
@@ -44,6 +47,9 @@
 
                 <div class="key-row">
                     <div id="key-equal" class="key key-equal">=</div>
+                    <div id="key-memory" class="key">M</div>
+                    <div id="key-memory-render" class="key">MR</div>
+
                 </div>
             </div><!-- /keypad -->
         </div><!-- /container -->
@@ -65,6 +71,7 @@
                     head: document.getElementsByTagName("head"),
                     body: document.getElementsByTagName("body"),
                     console: document.getElementById("console"),
+                    status: document.getElementById("status"),
                     keys: document.getElementsByClassName("key")
                 },
                 styles: ["style.css"],

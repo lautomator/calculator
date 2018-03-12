@@ -1,6 +1,10 @@
 Calculator
 ==========
 
+About
+-----
+This is a simple calculator. You can employ basic math functions. You can also add console output to memory to use later. The application demonstrates a Model View Controller (MVC) design pattern.
+
 Setup
 -----
 To get this running:

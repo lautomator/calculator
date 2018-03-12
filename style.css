@@ -9,31 +9,35 @@ body {
 }
 
 .container {
-    border: 1px solid #000;
-    height: 330px;
+    border: dotted 1px #000;
+    height: 325px;
     margin: 0 auto;
     overflow: hidden;
-    width: 203px;
+    width: 200px;
 }
 
 .display {
-    border-bottom: solid 1px #000;
+    background-color: #fff;
     height: 75px;
     width: 100%;
 }
 
+.display #console,
+.display #status {
+    display: inline-block;
+}
+
+.display #status {
+    float: right;
+}
+
 .key-row {
-    border-bottom: 1px solid #000;
     height: 50px;
     width: 100%;
 }
 
-.key-row:last-of-type {
-    border-bottom: none;
-}
-
 .key {
-    border-right: 1px solid #000;
+    background-color: #fff;
     cursor: pointer;
     display: grid;
     float: left;
@@ -42,12 +46,8 @@ body {
     width: 50px;
 }
 
-.key:last-of-type {
-    border-right: none;
-}
-
 .key-equal {
-    width: 100%;
+    width: 100px;
 }
 
 /*#key-1 { background: #fff url("img/led-digits.png") no-repeat -35px 0; }
