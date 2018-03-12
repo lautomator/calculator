@@ -1,13 +1,16 @@
-#Calculator
+Calculator
+==========
 
-##Setup
+Setup
+-----
 To get this running:
 
 * Clone or download this repository.
 
 * Open `index.html` from a browser.
 
-##Setup: Command Line (requires Python)
+Setup: Command Line (requires Python)
+-------------------------------------
 
 * `cd calculator`
 
