@@ -173,11 +173,20 @@ function myCalculatorApp(params) {
         // decimals in the console
         model.targets.console.innerText = uin;
 
-        if (model.status !== null) {
+        if (model.status !== null && model.memory !== 0) {
             model.targets.status.innerText = model.status;
         } else {
             model.targets.status.innerText = "";
         }
+    }
+
+    function renderKeyActive(target) {
+        // Displays the keypress view.
+        // Takes in the target id <str>
+        target.classList.add("keypress");
+        setTimeout(function () {
+            target.classList.remove("keypress");
+        }, 200);
     }
 
     // controller
@@ -244,6 +253,7 @@ function myCalculatorApp(params) {
             var validInput = getUserInput(userInput);
 
             if (validInput !== null) {
+                renderKeyActive(item.target);
                 main(validInput);
             }
         });
@@ -251,8 +261,8 @@ function myCalculatorApp(params) {
 
     function pressKeys() {
         // handle input with the keys
-        document.addEventListener("keypress", function (event) {
-            const keyName = event.key;
+        document.addEventListener("keypress", function (item) {
+            const keyName = item.key;
             var validInput = getUserInput(keyName);
 
             if (validInput !== null) {

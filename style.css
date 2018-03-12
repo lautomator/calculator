@@ -4,31 +4,40 @@
 }
 
 body {
+    font-family: "Monaco", sans-serif;
+    padding: 15px;
     -webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
 
 .container {
-    border: dotted 1px #000;
-    height: 325px;
+    border-radius: 4px;
+    height: 360px;
     margin: 0 auto;
     overflow: hidden;
     width: 200px;
 }
 
 .display {
-    background-color: #fff;
-    height: 75px;
+    background-color: #73daeb;
+    color: #fff;
+    font-size: 18px;
+    height: 110px;
     width: 100%;
 }
 
-.display #console,
-.display #status {
-    display: inline-block;
+.display #console {
+    height: 60px;
+    padding: 0 10px;
+    text-align: right;
+    width: 180px;
+    word-wrap: break-word;
 }
 
 .display #status {
-    float: right;
+    height: 40px;
+    padding: 10px 0 0 10px;
+    width: 50%;
 }
 
 .key-row {
@@ -37,12 +46,16 @@ body {
 }
 
 .key {
-    background-color: #fff;
+    background-color: #4c4c4c;
+    color: #fff;
     cursor: pointer;
     display: grid;
+    font-size: 22px;
     float: left;
     height: 50px;
+    line-height: 52px;
     overflow: hidden;
+    text-align: center;
     width: 50px;
 }
 
@@ -50,14 +63,14 @@ body {
     width: 100px;
 }
 
-/*#key-1 { background: #fff url("img/led-digits.png") no-repeat -35px 0; }
-#key-2 { background: #fff url("img/led-digits.png") no-repeat -90px 0; }
-#key-3 { background: #fff url("img/led-digits.png") no-repeat -140px 0; }
-#key-4 { background: #fff url("img/led-digits.png") no-repeat -190px 0; }
-#key-5 { background: #fff url("img/led-digits.png") no-repeat -240px 0; }
-#key-6 { background: #fff url("img/led-digits.png") no-repeat -290px 0; }
-#key-7 { background: #fff url("img/led-digits.png") no-repeat -340px 0; }
-#key-8 { background: #fff url("img/led-digits.png") no-repeat -390px 0; }
-#key-9 { background: #fff url("img/led-digits.png") no-repeat -440px 0; }
-#key-0 { background: #fff url("img/led-digits.png") no-repeat 10px 0; }
-#key-clear { background: #fff url("img/clear.png") no-repeat 0 0; }*/
+.key-op {
+    background-color: #5f5f5f;
+}
+
+.key-other {
+    background-color: #181818;
+}
+
+.keypress {
+    background-color: #3a3a3a;
+}
