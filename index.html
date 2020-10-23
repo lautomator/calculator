@@ -7,7 +7,7 @@
         <meta name="robots" content="noindex, nofollow">
         <meta name="description" content="This is a calculator.">
         <meta name="author" content="John Merigliano">
-        <link rel="shortcut icon" type="image/x-icon" href="c.png">
+        <link rel="shortcut icon" type="image/x-icon" href="img/c.png">
         <title>Calculator</title>
     </head>
     <body style="opacity: 0;">
@@ -136,8 +136,9 @@
                 calculatorApp.init(calculatorApp);
 
                 setTimeout(function () {
+                    calculatorApp.targets.body[0].style.backgroundImage = "url('img/bg_dots.jpg')";
                     calculatorApp.targets.body[0].style.opacity = "1.0";
-                }, 200);
+                }, 300);
             });
         </script>
     </body>

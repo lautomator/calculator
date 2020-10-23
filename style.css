@@ -4,10 +4,11 @@
 }
 
 body {
+    background-color: #2b2b2b;
     font-family: "Monaco", sans-serif;
     padding: 15px;
-    -webkit-transition: opacity 0.5s;
-    transition: opacity 0.5s;
+    -webkit-transition: opacity 1s;
+    transition: opacity 1s;
 }
 
 .container {
@@ -15,7 +16,7 @@ body {
     height: 360px;
     margin: 0 auto;
     overflow: hidden;
-    width: 200px;
+    width: 100%;
 }
 
 .display {
@@ -52,11 +53,11 @@ body {
     display: grid;
     font-size: 22px;
     float: left;
-    height: 50px;
+    height: 75px;
     line-height: 52px;
     overflow: hidden;
     text-align: center;
-    width: 50px;
+    width: 25%;
 }
 
 .key-equal {
@@ -74,3 +75,27 @@ body {
 .keypress {
     background-color: #3a3a3a;
 }
+
+/*
+ * =======
+ * DESKTOP
+ * =======
+ */
+@media only screen and (min-width: 768px) {
+
+    .container {
+        width: 200px;
+    }
+
+    .key {
+        height: 50px;
+        width: 50px;
+    }
+
+    .key-other {
+        width: 100px;
+    }
+
+
+}
+
